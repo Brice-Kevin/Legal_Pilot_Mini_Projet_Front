@@ -1,0 +1,73 @@
+<div style="margin-bottom: 4%;">
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Demarer un match</h5>
+            <b> ASM : </b>
+            <div style="display: inline-block;" class="card-text" *ngFor= "let eq1 of equipe_1">
+               | <a routerLink="joueur/{{eq1.id}}">{{eq1.fullName}}</a> |
+            </div>
+            <h1>VS</h1>
+            <b> CSA : </b>
+            <div style="display: inline-block;" class="card-text" *ngFor= "let eq2 of equipe_2">
+               | <a routerLink="joueur/{{eq2.id}}">{{eq2.fullName}}</a> |
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="PlayGame()">Demarrer le match</button>
+    </div>
+    <div class="card-footer text-muted" >
+        Score : ASM {{score_dom}} - {{score_ext}} CSA
+    </div>
+</div>
+
+            
+<h1>Liste des joueurs</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"> N° </th>
+            <th scope="col"> Prenoms & Nom </th>
+            <th scope="col"> Nationalité</th>
+            <th scope="col"> Poste </th>
+            <th scope="col"> </th>
+        </tr>
+    </thead>
+    <tbody *ngFor= "let j of joueurs">
+        <tr>
+            <th scope="row">{{ j.id }}</th>
+            <td>{{ j.fullName }}</td>
+            <td> <img style="height:20px" src="{{j.nationality}}"/> </td>
+            <td>{{ j.position }}</td>
+            <td>
+                <button type="button" class="btn btn-primary" routerLink="joueur/{{j.id}}">En savoir plus</button>
+                <button type="button" class="btn btn-warning" routerLink="joueur/{{j.id}}">Modifier</button>
+                <button type="button" class="btn btn-danger" (click)="deleteJoueur(j.id)">Supprimer</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<h1>Ajout d'un joueur</h1>
+<form #form="ngForm" (ngSubmit)="createJoueur(form)">
+    <div class="mb-3">
+        <label for="" class="form-label">Prénom(s) & Nom</label>
+        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="joueur.full_name">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Position</label>
+        <select id="position" name="position" class="form-control" [(ngModel)]="joueur.position">
+            <option value="Gardien" selected >Gardien</option>
+            <option value="Defenseur">Defenseur</option>
+            <option value="Milieu">Milieu</option>
+            <option value="Attaquant">Attaquant</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Date de naissance</label>
+        <input type="date" class="form-control" id="" name="date" [(ngModel)]="joueur.birthday">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Pays</label>
+        <input type="text" class="form-control" id="pays" name="pays" [(ngModel)]="joueur.nationality">
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter le joueur</button>
+</form>

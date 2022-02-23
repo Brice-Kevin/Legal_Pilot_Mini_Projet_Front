@@ -1,0 +1,56 @@
+
+<h1>Information sur un joueur</h1>
+<div class="card text-dark bg-light mb-12">
+    <div class="card-header">{{data?.fullName}} <img style="height:20px; margin-left:1%" src="{{data?.nationality}}"/></div>
+    <div class="card-body">
+        <h5 class="card-title">Informations sur le joueur</h5>
+        <p class="card-text">Poste : {{data?.position}}</p>
+        <p class="card-text">Date de naissance : {{data?.birthday | date :  "dd/MM/yyyy"}}</p>
+        <p class="card-text">Matchs joués : {{data?.appearances}}</p>
+        <p class="card-text">Buts marqués : {{data?.goals}}</p>
+        <p class="card-text">Passes decisives : {{data?.assists}}</p>
+    </div>
+</div>
+<br>
+<h1>Modifier un joueur</h1>
+<form #form="ngForm" (ngSubmit)="editJoueur(form)">
+    <div class="mb-3">
+        <label for="" class="form-label">Prénom(s) & Nom</label>
+        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="joueur.full_name">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Position</label>
+        <select id="position" name="position" class="form-control" [(ngModel)]="joueur.position">
+            <option value="Gardien" selected >Gardien</option>
+            <option value="Defenseur">Defenseur</option>
+            <option value="Milieu">Milieu</option>
+            <option value="Attaquant">Attaquant</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Date de naissance</label>
+        <input type="date" class="form-control" id="" name="date" [(ngModel)]="joueur.birthday">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Pays</label>
+        <input type="text" class="form-control" id="pays" name="pays" [(ngModel)]="joueur.nationality">
+    </div>
+    <div class="mb-3 row">
+        <div class="col-md-4">
+            <label for="" class="form-label">Matchs joués</label>
+            <input type="number" class="form-control col-md-2" id="appearances" min="0" name="pays" [(ngModel)]="joueur.appearances">
+        </div>
+        <div class="col-md-4">
+            <label for="" class="form-label">Matchs joués</label>
+            <input type="number" class="form-control col-md-2" id="goals" min="0" name="pays" [(ngModel)]="joueur.goals">
+        </div>
+        <div class="col-md-4">
+            <label for="" class="form-label">Passes decisives</label>
+            <input type="number" class="form-control col-md-2" id="assists" min="0" name="pays" [(ngModel)]="joueur.assists">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Modifier le joueur</button>
+</form>
+
+
+
